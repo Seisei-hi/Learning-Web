@@ -1,3 +1,3 @@
 # Learning-Web
 
-https://seisei-hi.github.io/Learning-Web/
+https://seisei-hi.github.io/Learning-Web/index.html
