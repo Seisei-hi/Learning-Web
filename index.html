@@ -11,12 +11,19 @@
         .scheduleBox {
             background: rgb(56, 56, 56);
             background-clip: padding-box;
-            width: 14rem;
-            height: 20rem;
             border-radius: 6px;
+            width: 5rem;
             padding: 1rem;
+        }
+
+        .flex-container {
+            flex-direction: row;
             display: flex;
-            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .flex-item {
+            flex: 1;
         }
 
         .popup {
@@ -76,7 +83,23 @@
             height: 100%;
             overflow: hidden;
         }
+
+        option{
+            background-color: rgb(37, 37, 37);
+            color: whitesmoke;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        *:focus {
+            outline: none;
+        }
     </style>
+    <script type="text/javascript" src="funcs.js"></script>
 
     <div class='rightPanel' style='float: right; width: 25%; height: 100%; background: rgb(56,56,56); z-index: 2;'>
         <input type='button' value='Github' onclick="location.href='https://github.com/Seisei-hi/Learning-Web'">
@@ -99,97 +122,58 @@
         </div>
 
         <div style='border-bottom: 1px solid; border-color: whitesmoke'>
-            <input type='text' id='title'value="" placeholder='Create New Schedule'
+
+            <div type='text' id='title' contenteditable="true" placeholder="a"
                 style=' width: 100%; border: none; background: none; color: whitesmoke; font-size: 1.6rem;'>
+            </div>
         </div>
 
         <div style='align-self: flex-end; margin-bottom: 2rem'>
             <div>
                 <label>Due:</label>
-                <input type='text' id='day'  placeholder='D*'
-                    style='width: 1.4rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'>
+                <input type='number' id='day' placeholder='D*' min="1" max="31"
+                    style='width: 1.4rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
+                    oninput="this.value = LimitNumber(this.value,1,31)">
                 <label>/</label>
-                <input type='text' id='month' placeholder='M*'
-                    style='width: 1.4rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'>
+                <select  id="month" 
+                    onchange="if(this.value =='Month')
+                    {this.style.color=RgbToHex(117, 117, 117);}
+                    else{this.style.color=RgbToHex(245,245,245);}"
+                    style='width: 5rem; font-size: 1.2rem; border: none; background: none; color: rgb(117, 117, 117);'>
+                    <option value="Month" selected="selected">Month</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+                </select>
+                
                 <label>/</label>
-                <input type='text' id='year' placeholder='Y***'
-                    style='width: 3rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'>
+                <input type='number' id='year' placeholder='Y***'
+                    style='width: 3rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
+                    oninput='this.value = LimitNumber(this.value,1,2999);'>
             </div>
         </div>
         <div style='width: 100%; align-self: center;'>
-            <textarea id='detail' placeholder='Detail' style='width: 99%; 
-                    height: 8rem; font-size: 1.4rem; 
-                    background: rgb(30, 30, 30); color: whitesmoke; 
-                    resize: none; border: none; border-radius: 4px; '></textarea>
+            <div id='detail' placeholder='Detail' contenteditable="true" style="width: 100%; font-size: 1.2rem; height: 10rem;
+            color: whitesmoke; background: rgb(30, 30, 30); border-radius: 4px;">
+            </div>
         </div>
     </div>
-
     <div id='popupDim' class='dim'></div>
-    <div style='float: left; height: 100%; width:75%'>
-        <div id='scheduleLine' style='display: flex; flex-wrap: wrap'>
 
+    <div style='float: left; height: 100%; width:75%'>
+        <div id='scheduleLine' class="flex-container">
 
         </div>
     </div>
-
-    <script>
-        class ScheduleObject {
-            constructor(title, due, detailText, image = null, importance = null) {
-                this.title = title;
-                this.due = due;
-                this.detailText = detailText;
-                this.image = image;
-                this.importance = importance;
-            }
-        }
-
-        function CreateSchedule() {
-            var title = document.getElementById('title').nodeValue;
-            var due = document.getElementById('day').nodeValue + '/' +
-                document.getElementById('month').nodeValue + '/' +
-                document.getElementById('year').nodeValue;
-            var detailText = document.getElementById('detail').nodeValue;
-
-            var schedule = new ScheduleObject(title, due, detailText,0,0);
-
-            var scheduleBox = document.createElement('div');
-            scheduleBox.className = 'scheduleBox';
-
-            var titleBox = document.createElement('div');
-            titleBox.style = 'border-bottom: 1px solid; border-color: whitesmoke';
-            var dueDayBox = document.createElement('div');
-            dueDayBox.style = 'align-self: flex-end; margin-bottom: 2rem';
-            var detailBox = document.createElement('div');
-            detailBox.style = 'width: 100%; align-self: center;';
-
-            title = document.createElement('label');
-            title.style = 'width: 100%; border: none; background: none; color: whitesmoke;';
-            title.innerText = schedule.title;
-
-            due = document.createElement('label');
-            due.style = 'border: none; background: none; color: whitesmoke;';
-            due.innerText = schedule.due;
-
-            detailText = document.createElement('textarea');
-            detailText.style = 'border: none; background: none; color: whitesmoke;';
-            detailText.nodeValue = schedule.detailText;
-
-            document.getElementById('scheduleLine').appendChild(scheduleBox);
-
-            scheduleBox.appendChild(titleBox);
-            scheduleBox.appendChild(dueDayBox);
-            scheduleBox.appendChild(detailBox);
-
-            titleBox.appendChild(title);
-            dueDayBox.appendChild(due);
-            detailBox.appendChild(detailText);
-
-
-
-        }
-
-    </script>
-
 </body>
 
 </html>
