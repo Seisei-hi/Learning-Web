@@ -84,7 +84,7 @@
             overflow: hidden;
         }
 
-        option{
+        option {
             background-color: rgb(37, 37, 37);
             color: whitesmoke;
         }
@@ -98,6 +98,12 @@
         *:focus {
             outline: none;
         }
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
     </style>
     <script type="text/javascript" src="funcs.js"></script>
 
@@ -118,50 +124,56 @@
                     var dim = document.getElementById("popupDim"); dim.style.opacity=0; dim.style.zIndex=-3;
                     CreateSchedule();'>
             </div>
-
         </div>
 
         <div style='border-bottom: 1px solid; border-color: whitesmoke'>
-
             <div type='text' id='title' contenteditable="true" placeholder="a"
                 style=' width: 100%; border: none; background: none; color: whitesmoke; font-size: 1.6rem;'>
             </div>
         </div>
 
-        <div style='align-self: flex-end; margin-bottom: 2rem'>
+        <div style='align-self: flex-end;'>
             <div>
                 <label>Due:</label>
                 <input type='number' id='day' placeholder='D*' min="1" max="31"
                     style='width: 1.4rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
                     oninput="this.value = LimitNumber(this.value,1,31)">
                 <label>/</label>
-                <select  id="month" 
-                    onchange="if(this.value =='Month')
+                <select id="month"
+                    style='width: 5rem; font-size: 1.2rem; border: none; background: none; color: rgb(117, 117, 117);'
+                    onchange="
+                    if(this.value =='Month')
                     {this.style.color=RgbToHex(117, 117, 117);}
-                    else{this.style.color=RgbToHex(245,245,245);}"
-                    style='width: 5rem; font-size: 1.2rem; border: none; background: none; color: rgb(117, 117, 117);'>
-                    <option value="Month" selected="selected">Month</option>
-                    <option value="Jan">Jan</option>
-                    <option value="Feb">Feb</option>
-                    <option value="Mar">Mar</option>
-                    <option value="Apr">Apr</option>
-                    <option value="May">May</option>
-                    <option value="Jun">Jun</option>
-                    <option value="Jul">Jul</option>
-                    <option value="Aug">Aug</option>
-                    <option value="Sep">Sep</option>
-                    <option value="Oct">Oct</option>
-                    <option value="Nov">Nov</option>
-                    <option value="Dec">Dec</option>
+                    else{this.style.color=RgbToHex(245,245,245);}
+                    ">
+                    <option value="" selected="selected">Month</option>
+                    <option value="0">Jan 1</option>
+                    <option value="1">Feb 2</option>
+                    <option value="2">Mar 3</option>
+                    <option value="3">Apr 4</option>
+                    <option value="4">May 5</option>
+                    <option value="5">Jun 6</option>
+                    <option value="6">Jul 7</option>
+                    <option value="7">Aug 8</option>
+                    <option value="8">Sep 9</option>
+                    <option value="9">Oct 10</option>
+                    <option value="10">Nov 11</option>
+                    <option value="11">Dec 12</option>
                 </select>
-                
                 <label>/</label>
                 <input type='number' id='year' placeholder='Y***'
                     style='width: 3rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
                     oninput='this.value = LimitNumber(this.value,1,2999);'>
             </div>
         </div>
-        <div style='width: 100%; align-self: center;'>
+
+        <label id="importanceToggle" class="toggle" style="align-self: flex-end; width: 1.6rem; height: 1.6rem; border-radius: 0.8rem; background: rgb(117, 117, 117);" >
+            <input type="checkbox" 
+            onclick="//var parentLabel = document.getElementById(importanceToggle);
+            document.getElementById('importanceToggle').style.backgroundColor = this.checked ? RgbToHex(255,215,0) : RgbToHex(117,117,117);" >
+        </label>
+
+        <div style='width: 100%; align-self: center; margin-top: 1rem;'>
             <div id='detail' placeholder='Detail' contenteditable="true" style="width: 100%; font-size: 1.2rem; height: 10rem;
             color: whitesmoke; background: rgb(30, 30, 30); border-radius: 4px;">
             </div>

@@ -19,48 +19,22 @@ class ScheduleObject {
 
 function CreateSchedule() {
     var title = document.getElementById('title').innerHTML;
-    var due = document.getElementById('day').value + '/' +
-        document.getElementById('month').value + '/' +
-        document.getElementById('year').value;
+    //https://poiemaweb.com/js-date
+    var due = new Date(
+        document.getElementById('year').value, 
+        document.getElementById('month').value, 
+        document.getElementById('day').value, 
+        0, 0, 0, 0);
     var detailText = document.getElementById('detail').innerHTML;
 
     var schedule = new ScheduleObject(title, due, detailText, 0, 0);
 
     scheduleJson = JSON.stringify(schduleArray);
+
+    console.log(due);
     console.log(scheduleJson);
 
-    //여기부터 수정각
-    var scheduleBox = document.createElement('div');
-    scheduleBox.className = 'scheduleBox flex-item';
-
-    var titleBox = document.createElement('div');
-    titleBox.style = 'border-bottom: 1px solid; border-color: whitesmoke';
-    var dueDayBox = document.createElement('div');
-    dueDayBox.style = 'align-self: flex-end; margin-bottom: 2rem';
-    var detailBox = document.createElement('div');
-    detailBox.style = 'width: 100%; align-self: center;';
-
-    title = document.createElement('label');
-    title.style = 'width: 100%; border: none; background: none; color: whitesmoke;';
-    title.innerHTML = schedule.title;
-
-    due = document.createElement('label');
-    due.style = 'border: none; background: none; color: whitesmoke;';
-    due.innerText = schedule.due;
-
-    detailText = document.createElement('div');
-    detailText.style = 'height: 5rem; border-radius: 4px; border: none; background: rgb(30, 30, 30); color: whitesmoke;';
-    detailText.innerHTML = schedule.detailText;
-
-    document.getElementById('scheduleLine').appendChild(scheduleBox);
-
-    scheduleBox.appendChild(titleBox);
-    scheduleBox.appendChild(dueDayBox);
-    scheduleBox.appendChild(detailBox);
-
-    titleBox.appendChild(title);
-    dueDayBox.appendChild(due);
-    detailBox.appendChild(detailText);
+    ApplyScheduleJson(scheduleJson);
 }
 function ApplyScheduleJson() {
 

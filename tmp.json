@@ -1,34 +1,26 @@
 [
     {
         "title": "\n            ",
-        "due": "//",
+        "due": "-000001-12-31T03:31:30.093Z",
         "detailText": "\n            ",
         "image": 0,
         "importance": 0,
         "serialNumber": 0
     },
     {
-        "title": "\n            ",
-        "due": "//",
-        "detailText": "\n            ",
+        "title": "Schedule 1",
+        "due": "2020-01-01T03:05:33.865Z",
+        "detailText": "Test Text 1",
         "image": 0,
         "importance": 0,
         "serialNumber": 1
     },
     {
-        "title": "\n            ",
-        "due": "//",
-        "detailText": "\n            ",
+        "title": "Schedule 2",
+        "due": "2020-01-01T03:05:53.062Z",
+        "detailText": "Test Text 2",
         "image": 0,
         "importance": 0,
         "serialNumber": 2
-    },
-    {
-        "title": "\n            ",
-        "due": "//",
-        "detailText": "\n            ",
-        "image": 0,
-        "importance": 0,
-        "serialNumber": 3
     }
 ]
