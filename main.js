@@ -1,19 +1,19 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+var path = require('path');
 
 var app = http.createServer(function (request, response) {
-    var murl = request.url;
-    var queryData = url.parse(murl, true).query;
-    if (murl == '/') {
-        murl = '/index.html';
-    }
-    else if (murl == '/favicon.ico') {
-        response.writeHead(404);
-        response.end();
-        return;
-    }
-    response.writeHead(200);
-    response.end(fs.readFileSync(__dirname + murl));
+  if (request.url == '/') {
+    request.url = '/index.html';
+  }
+  if (request.url == '/favicon.ico') {
+    return response.writeHead(404);
+  }
+  response.writeHead(200);
+  response.end(fs.readFileSync(__dirname + request.url));
 });
 app.listen(3000);
+//node main.js
+
+

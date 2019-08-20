@@ -4,188 +4,89 @@
 <head>
     <title>Learning-Web</title>
     <meta charset='utf-8'>
-</head>
-
-<body>
     <style>
-        .scheduleBox {
-            background: rgb(56, 56, 56);
-            background-clip: padding-box;
-            border-radius: 6px;
-            width: 5rem;
-            padding: 1rem;
-        }
-
         .flex-container {
-            flex-direction: row;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .flex-item {
-            flex: 1;
-        }
-
-        .popup {
-            z-index: -3;
-            opacity: 0;
-            border-radius: 10px;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 380px;
-            height: 500px;
-            padding: 2rem;
-            background: rgb(56, 56, 56);
-            background-clip: padding-box;
-            transition: all 0.3s;
             display: flex;
             flex-direction: column;
-        }
-
-        .dim {
-            z-index: -3;
-            opacity: 0;
-            position: fixed;
+            box-shadow: rgba(255, 255, 255, 1) 0px 0px 4px;
+            margin: 10px;
+            width: 300px;}
+        .flex-container img {
+            object-fit: cover;
             width: 100%;
-            height: 100%;
-            background: black;
-            transition: all 0.3s;
-        }
-
-        .writeBox {
-            width: 95%;
-            height: 25px;
-            margin: 0 auto;
-            border-radius: 4px;
+            height: 100;}
+        .flex-container > div{
+            flex: 1 1 0%;}
+        .info{
+            box-sizing: border-box;
+            padding: 10px;
+            width: 100%;}
+        .info >.title {
+            font-weight: bold;
+            font-size: 2rem;}
+        .info > .date{
             font-size: 1.2rem;
-            padding: .5rem;
-            border: 1px solid;
-            border-color: rgb(56, 56, 56);
-            color: whitesmoke;
-            background: rgb(30, 30, 30);
-            background-clip: padding-box;
-
-        }
-
+            color: darkgray}
+        .info > .detail {
+            font-size: 1.2rem;
+            margin: 0%}
         html {
             font-size: 100%;
             margin: 0;
             height: 100%;
-            overflow: hidden;
-            color: whitesmoke;
-            background: rgb(37, 37, 37);
-        }
-
+            color: whitesmoke;  
+            background: rgb(30, 30, 30);}
         body {
             margin: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        option {
-            background-color: rgb(37, 37, 37);
-            color: whitesmoke;
-        }
-
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
+            height: 100%;}
         *:focus {
-            outline: none;
-        }
-        .toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
+            outline: none;}
     </style>
-    <script type="text/javascript" src="funcs.js"></script>
-
-    <div class='rightPanel' style='float: right; width: 25%; height: 100%; background: rgb(56,56,56); z-index: 2;'>
-        <input type='button' value='Github' onclick="location.href='https://github.com/Seisei-hi/Learning-Web'">
-        <input type='button' value='Create Schedule' onclick=' var popup = document.getElementById("ScheduleSetPop"); popup.style.opacity=1; popup.style.zIndex=5;
-            var dim = document.getElementById("popupDim"); dim.style.opacity=0.5; dim.style.zIndex=4;'>
-    </div>
-
-    <div class='popup' id='ScheduleSetPop'>
+</head>
+    <body>
         <div>
-            <div style='position: absolute; left:100%; margin-left: .5rem'>
-                <input type='button' value='Exit' onclick='
-                    var popup =document.getElementById("ScheduleSetPop"); popup.style.opacity=0; popup.style.zIndex=-3;
-                    var dim = document.getElementById("popupDim"); dim.style.opacity=0; dim.style.zIndex=-3;'>
-                <input type='button' value='Create' onclick='
-                    var popup =document.getElementById("ScheduleSetPop"); popup.style.opacity=0; popup.style.zIndex=-3;
-                    var dim = document.getElementById("popupDim"); dim.style.opacity=0; dim.style.zIndex=-3;
-                    CreateSchedule();'>
-            </div>
-        </div>
-
-        <div style='border-bottom: 1px solid; border-color: whitesmoke'>
-            <div type='text' id='title' contenteditable="true" placeholder="a"
-                style=' width: 100%; border: none; background: none; color: whitesmoke; font-size: 1.6rem;'>
-            </div>
-        </div>
-
-        <div style='align-self: flex-end;'>
             <div>
-                <label>Due:</label>
-                <input type='number' id='day' placeholder='D*' min="1" max="31"
-                    style='width: 1.4rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
-                    oninput="this.value = LimitNumber(this.value,1,31)">
-                <label>/</label>
-                <select id="month"
-                    style='width: 5rem; font-size: 1.2rem; border: none; background: none; color: rgb(117, 117, 117);'
-                    onchange="
-                    if(this.value =='Month')
-                    {this.style.color=RgbToHex(117, 117, 117);}
-                    else{this.style.color=RgbToHex(245,245,245);}
-                    ">
-                    <option value="" selected="selected">Month</option>
-                    <option value="0">Jan 1</option>
-                    <option value="1">Feb 2</option>
-                    <option value="2">Mar 3</option>
-                    <option value="3">Apr 4</option>
-                    <option value="4">May 5</option>
-                    <option value="5">Jun 6</option>
-                    <option value="6">Jul 7</option>
-                    <option value="7">Aug 8</option>
-                    <option value="8">Sep 9</option>
-                    <option value="9">Oct 10</option>
-                    <option value="10">Nov 11</option>
-                    <option value="11">Dec 12</option>
-                </select>
-                <label>/</label>
-                <input type='number' id='year' placeholder='Y***'
-                    style='width: 3rem; font-size: 1.2rem; border: none; background: none; color: whitesmoke;'
-                    oninput='this.value = LimitNumber(this.value,1,2999);'>
+                <form action="http://localhost:3000" method="POST">
+                    <div class="flex-container">
+                        <div>
+                            <img id="imagePreview" src="Fx.gif">
+                        </div>
+                        <div class="info">
+                            <input accept="image/*" name="image" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
+                                var reader = new FileReader();
+                                reader.readAsDataURL(this.files[0]);
+                                reader.onload = function (event) {
+                                    document.getElementById('imagePreview').src = event.target.result;
+                                }">
+                            <input class="title" style="width:100%" name="title">
+                            <span class="date">xxxx.xx.xx</span>
+                            <input class="detail" name="detail">
+                        </div>
+                    </div>
+                    <input type="submit">
+                </form>
+                <div class="flex-container">
+                    <div>
+                        <img src="nrmaldaisy1.png">
+                    </div>
+                    <div class="info">
+                        <span class="title">HB</span>
+                        <span class="date">1230.12.3</span>
+                        <p class="detail">2BSB</p>
+                    </div>
+                </div>
+                <div class="flex-container">
+                    <div>
+                        <img src="LightHill.png">
+                    </div>
+                    <div class="info">
+                        <span class="title">HB</span>
+                        <span class="date">1230.12.3</span>
+                        <p class="detail">HB is 2BSB</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <label id="importanceToggle" class="toggle" style="align-self: flex-end; width: 1.6rem; height: 1.6rem; border-radius: 0.8rem; background: rgb(117, 117, 117);" >
-            <input type="checkbox" 
-            onclick="//var parentLabel = document.getElementById(importanceToggle);
-            document.getElementById('importanceToggle').style.backgroundColor = this.checked ? RgbToHex(255,215,0) : RgbToHex(117,117,117);" >
-        </label>
-
-        <div style='width: 100%; align-self: center; margin-top: 1rem;'>
-            <div id='detail' placeholder='Detail' contenteditable="true" style="width: 100%; font-size: 1.2rem; height: 10rem;
-            color: whitesmoke; background: rgb(30, 30, 30); border-radius: 4px;">
-            </div>
-        </div>
-    </div>
-    <div id='popupDim' class='dim'></div>
-
-    <div style='float: left; height: 100%; width:75%'>
-        <div id='scheduleLine' class="flex-container">
-
-        </div>
-    </div>
-</body>
-
+        <script type="text/javascript" src="funcs.js"></script>
+    </body>
 </html>
