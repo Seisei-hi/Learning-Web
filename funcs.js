@@ -1,4 +1,5 @@
-let sheduleSerialNumber = 0;
+let scheduleSerialNumber = 0;
+let sendImgDataBinary = "";
 
 class ScheduleObject {
     constructor(title, due, detailText, image = null, importance = null) {
@@ -7,7 +8,7 @@ class ScheduleObject {
         this.detailText = detailText;
         this.image = image;
         this.importance = importance;
-        this.serialNumber = sheduleSerialNumber++;
+        this.serialNumber = scheduleSerialNumber++;
     }
 }
 function createSchedule() {
@@ -29,19 +30,24 @@ function createSchedule() {
 }
 function applyScheduleJson(json) {
     var jsonArray = JSON.parse(json);
-
 }
-function applyOnWeb(url) {
-    var xml = new XMLHttpRequest();
-    xml.open("GET", url, false);
-    xml.send();
+function sendFormData() {
+    var xhr = new XMLHttpRequest();
+    var fileReader = new FileReader();
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xhr.response);
+        }
+    }
+    fileReader.onload = function (event) {
+        xhr.send(`${/*title*/}$tr2$end$plitor${/*due*/}$tr2$end$plitor${/*detailText*/}$tr2$end$plitor${event.target.result}`);
+    }
+    xhr.open("POST", "/post/upload", true);
+    fileReader.readAsBinaryString(document.getElementById("imageInput").files[0]);
 }
 function imagePreview(inputFile) {
-    var reader = new FileReader();
-    reader.readAsDataURL(inputFile.files[0]);
-    reader.onload = function (event) {
-        document.getElementById("imagePreview").src = event.target.result;
-    }
+
 }
 function limitNumber(comparison, min, max) {
     if (comparison != '') {
@@ -52,4 +58,7 @@ function limitNumber(comparison, min, max) {
 }
 function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+function abcd(){
+    console.log(1);
 }

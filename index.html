@@ -25,11 +25,16 @@
             font-weight: bold;
             font-size: 2rem;}
         .info > .date{
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: darkgray}
         .info > .detail {
             font-size: 1.2rem;
             margin: 0%}
+        button{  
+        background:slategrey;
+        color :whitesmoke;
+        cursor: pointer;
+        border: none;}
         html {
             font-size: 100%;
             margin: 0;
@@ -40,31 +45,32 @@
             margin: 0;
             height: 100%;}
         *:focus {
-            outline: none;}
+            /*outline: none;*/}
     </style>
 </head>
     <body>
         <div>
             <div>
-                <form action="http://localhost:3000" method="POST">
-                    <div class="flex-container">
+                <div class="flex-container">
+                    <div>
+                        <img id="preview" src="Fx.gif">
+                    </div>
+                    <div class="info">
                         <div>
-                            <img id="imagePreview" src="Fx.gif">
-                        </div>
-                        <div class="info">
-                            <input accept="image/*" name="image" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
+                            <input accept="image/*" id="imageInput" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
                                 var reader = new FileReader();
                                 reader.readAsDataURL(this.files[0]);
                                 reader.onload = function (event) {
-                                    document.getElementById('imagePreview').src = event.target.result;
+                                    document.getElementById('preview').src = event.target.result;
                                 }">
-                            <input class="title" style="width:100%" name="title">
-                            <span class="date">xxxx.xx.xx</span>
-                            <input class="detail" name="detail">
                         </div>
+                        <span id="title-input" class="title" contenteditable="true">Title</span>
+                        <span id="date-input" class="date" contenteditable="true">XXXX.XX.XX</span>    
+                        <div id="detail-input" class="detail" contenteditable="true">Detail</div>
                     </div>
-                    <input type="submit">
-                </form>
+                    <button onclick="sendFormData()">aaaaa</button>
+                </div>
+                
                 <div class="flex-container">
                     <div>
                         <img src="nrmaldaisy1.png">
