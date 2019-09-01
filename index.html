@@ -6,30 +6,67 @@
     <meta charset='utf-8'>
     <style>
         .flex-container {
-            display: flex;
-            flex-direction: column;
+            display: flex;}
+        .flex-column{
+            flex-direction: column;}
+        .flex-row{
+            flex-direction: row;}
+        .box-edge{
             box-shadow: rgba(255, 255, 255, 1) 0px 0px 4px;
-            margin: 10px;
+            margin: 10px;}
+        .box-center{
+            margin: auto;}
+        #datepicker{
+            width: 700px;
+            max-width: 100%;
+            flex-wrap: wrap;
+            justify-content:space-between;
+            text-align: center}
+        #datepicker > div{
+            flex: 1;}
+        #datepicker-calender{
             width: 300px;}
-        .flex-container img {
-            object-fit: cover;
-            width: 100%;
-            height: 100;}
-        .flex-container > div{
-            flex: 1 1 0%;}
-        .info{
+        #datepicker-calender-day-container{
+            flex-wrap: wrap; 
+            justify-content:space-between;}
+        #datepicker-calender-day-container > .datepicker-calender-day{
+            flex: 1 1 14.285714285%;}
+        .post{
+            width: 300px;
+            margin: 10px;}
+        .post-content{
             box-sizing: border-box;
             padding: 10px;
             width: 100%;}
-        .info >.title {
+        .post-content >.title {
             font-weight: bold;
             font-size: 2rem;}
-        .info > .date{
-            font-size: 1.5rem;
+        .post-content > .date{
+            font-size: 120rem;
             color: darkgray}
-        .info > .detail {
+        .post-content > .detail {
             font-size: 1.2rem;
-            margin: 0%}
+            color:darkgray;
+            border-top: 1px solid slategrey;
+            margin: 0%;}
+        .slider{
+            -webkit-appearance: none;
+            background: none;
+            width: 100%;}
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: 1px solid slategrey;
+            cursor: ew-resize;}
+        a{
+            color: aliceblue;}
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100;}
         button{  
         background:slategrey;
         color :whitesmoke;
@@ -51,48 +88,70 @@
     <body>
         <div>
             <div>
-                <div class="flex-container">
-                    <div>
-                        <img id="preview" src="Fx.gif">
-                    </div>
-                    <div class="info">
-                        <div>
-                            <input accept="image/*" id="imageInput" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
-                                var reader = new FileReader();
-                                reader.readAsDataURL(this.files[0]);
-                                reader.onload = function (event) {
-                                    document.getElementById('preview').src = event.target.result;
-                                }">
+                <div class="post flex-container flex-column box-edge">
+                    <div href="" style="position: relative">
+                        <img id="preview" src="Fx.gif" >
+                        <div style="position: absolute; top: 10px; right: 10px; text-align: center;">
+                            <div class="date" contenteditable="true" datetime="">27</div>   
+                            <div class="date" contenteditable="true" datetime="">MAR</div>
                         </div>
+                    </div>
+                    <div>
+                        <input accept="image/*" id="image-input" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
+                            var reader = new FileReader();
+                            reader.readAsDataURL(this.files[0]);
+                            reader.onload = function (event) {
+                                document.getElementById('preview').src = event.target.result;
+                            }"> 
+                    </div>
+                    <div class="post-content">
                         <span id="title-input" class="title" contenteditable="true">Title</span>
-                        <span id="date-input" class="date" contenteditable="true">XXXX.XX.XX</span>    
                         <div id="detail-input" class="detail" contenteditable="true">Detail</div>
                     </div>
-                    <button onclick="sendFormData()">aaaaa</button>
+                    <button onclick="sendFormData()">MAKE</button>
                 </div>
-                
-                <div class="flex-container">
+                <!--DATE-PICKER-->
+                <div id="datepicker" class="flex-container flex-row box-edge">
+                    <div id="datepicker-calender">
+                        <div>
+                            <button>prev Month</button>
+                            <span>THIS MONTH</span>
+                            <button>next Month</button>
+                        </div>
+                        <div id="datepicker-calender-day-container" class="flex-container flex-row">
+                            <div class="datepicker-calender-day">SUN</div>
+                            <div class="datepicker-calender-day">MON</div>
+                            <div class="datepicker-calender-day">TUE</div>
+                            <div class="datepicker-calender-day">WED</div>
+                            <div class="datepicker-calender-day">THU</div>
+                            <div class="datepicker-calender-day">FRI</div>
+                            <div class="datepicker-calender-day">SAT</div>
+                        </div>
+                    </div>
                     <div>
-                        <img src="nrmaldaisy1.png">
-                    </div>
-                    <div class="info">
-                        <span class="title">HB</span>
-                        <span class="date">1230.12.3</span>
-                        <p class="detail">2BSB</p>
-                    </div>
-                </div>
-                <div class="flex-container">
-                    <div>
-                        <img src="LightHill.png">
-                    </div>
-                    <div class="info">
-                        <span class="title">HB</span>
-                        <span class="date">1230.12.3</span>
-                        <p class="detail">HB is 2BSB</p>
+                        <div>
+                            <input type="range" min="0" max="12" class="slider box-center">
+                            <div class="flex-container flex-row" style="justify-content: space-between;">
+                                <div style="width: 0.2rem; height:0.5rem;"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
+                                <div style="width: 0.2rem; height:0.5rem;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <script type="text/javascript" src="funcs.js"></script>
     </body>
-</html>
+</html> 
