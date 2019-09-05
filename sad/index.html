@@ -1,0 +1,32 @@
+
+<script>
+    function setCalender(date = new Date()){
+
+        var selectedYear = date.getFullYear();
+        var selectedMonth = date.getMonth();
+        var selecteddate = date.getDate();
+        var calender = document.getElementById("calender");
+
+        date.setFullYear(selectedYear,selectedMonth,1);
+        var thisSundayDate = date.getDate();
+
+        for (let i = 1; i < date.getDay() != 0 ; i--) {
+            date.setFullYear(selectedYear,selectedMonth,i);
+        }
+        console.log(date);
+        for (let i = 0; i < 42; i++) {
+            let dayDiv = document.createElement("div");
+            date.setFullYear(selectedYear, selectedMonth, thisSundayDate + i);
+            dayDiv.className="calender-day";
+            dayDiv.innerText=date.getDate();
+            calender.appendChild(dayDiv);
+        }
+        
+    }
+    function clearCalender(){
+        var calender = document.getElementById("calender");
+        for (let i = 6;i < calender.children.length; i++) {
+            calender.children[i].remove();
+        }
+    }
+</script>
