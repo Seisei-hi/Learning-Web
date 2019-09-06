@@ -17,20 +17,28 @@
         .box-center{
             margin: auto;}
         #datepicker{
-            width: 700px;
+            width: 600px;
             max-width: 100%;
             flex-wrap: wrap;
             justify-content:space-between;
             text-align: center}
         #datepicker > div{
-            flex: 1;}
+            flex: 0;}
         #datepicker-calender{
-            width: 300px;}
+            width: 50%;}
+        #datepicker-timepicker{
+            width: 50%;}
         #datepicker-calender-day-container{
             flex-wrap: wrap; 
             justify-content:space-between;}
         #datepicker-calender-day-container > .datepicker-calender-day{
-            flex: 1 1 14.285714285%;}
+            flex: 0 0 14.285714285%;
+            padding: 5% 0}
+        #datepicker-calender-day-container > .date{
+            font-weight: bold;}
+        #datepicker-calender-day-container > .date:hover{
+            transition: all .5s;
+            background-color: crimson;}
         .post{
             width: 300px;
             margin: 10px;}
@@ -50,17 +58,20 @@
             border-top: 1px solid slategrey;
             margin: 0%;}
         .slider{
+            width: 100%;
             -webkit-appearance: none;
             background: none;
-            width: 100%;}
+            cursor: ew-resize;}
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 1rem;
-            border: 1px solid slategrey;
-            cursor: ew-resize;}
+}
+        #datepicker-timepicker-slider::-webkit-slider-thumb{
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 0.9rem;
+            background:crimson;}
+            
         a{
             color: aliceblue;}
         img {
@@ -110,13 +121,13 @@
                     </div>
                     <button onclick="sendFormData()">MAKE</button>
                 </div>
-                <!--DATE-PICKER-->
+                <!--DATE PICKER-->
                 <div id="datepicker" class="flex-container flex-row box-edge">
                     <div id="datepicker-calender">
                         <div>
-                            <button>prev Month</button>
-                            <span>THIS MONTH</span>
-                            <button>next Month</button>
+                            <button onclick=""> < </button>
+                            <span id="datepicker-calender-month">THIS MONTH</span>
+                            <button onclick=""> > </button>
                         </div>
                         <div id="datepicker-calender-day-container" class="flex-container flex-row">
                             <div class="datepicker-calender-day">SUN</div>
@@ -128,30 +139,37 @@
                             <div class="datepicker-calender-day">SAT</div>
                         </div>
                     </div>
-                    <div>
+                    <div id="datepicker-timepicker">
                         <div>
-                            <input type="range" min="0" max="12" class="slider box-center">
-                            <div class="flex-container flex-row" style="justify-content: space-between;">
-                                <div style="width: 0.2rem; height:0.5rem;"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem; background: slategrey"></div>
-                                <div style="width: 0.2rem; height:0.5rem;"></div>
+                            <input id="datepicker-timepicker-slider" type="range" min="0" max="72" class="slider box-center">
+                            <div class="flex-container flex-row" style="justify-content: space-between; align-items: center">
+                                <div style="width: 0.3rem;"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem; height:0.5rem; background: crimson"></div>
+                                <div style="width: 0.3rem;"></div>
                             </div>
+                        </div>
+                        <div>
+                            <button>-</button>
+                            <span>Time</span>
+                            <button>+</button>
                         </div>
                     </div>
                 </div>
+                <!--DATE PICKER END-->
             </div>
         </div>
         <script type="text/javascript" src="funcs.js"></script>
+        <script type="text/javascript" src="timepicker.js"></script>
     </body>
 </html> 
