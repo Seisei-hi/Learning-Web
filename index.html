@@ -23,22 +23,19 @@
             justify-content:space-between;
             text-align: center}
         #datepicker > div{
-            flex: 0;}
-        #datepicker-calender{
-            width: 50%;}
-        #datepicker-timepicker{
-            width: 50%;}
-        #datepicker-calender-day-container{
-            flex-wrap: wrap; 
-            justify-content:space-between;}
-        #datepicker-calender-day-container > .datepicker-calender-day{
-            flex: 0 0 14.285714285%;
-            padding: 5% 0}
+            flex: 0 0 50% ;}
+
+        #datepicker-calender-table > .datepicker-calender-day{
+            width: 14.2857142857%;
+            padding: 5% 0;}
         #datepicker-calender-day-container > .date{
             font-weight: bold;}
         #datepicker-calender-day-container > .date:hover{
             transition: all .5s;
             background-color: crimson;}
+        #datepicker-calender-table{
+           width: 100%;
+        }
         .post{
             width: 300px;
             margin: 10px;}
@@ -64,14 +61,12 @@
             cursor: ew-resize;}
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-}
+            appearance: none;}
         #datepicker-timepicker-slider::-webkit-slider-thumb{
             width: 1.8rem;
             height: 1.8rem;
             border-radius: 0.9rem;
-            background:crimson;}
-            
+            background:crimson;}          
         a{
             color: aliceblue;}
         img {
@@ -124,20 +119,29 @@
                 <!--DATE PICKER-->
                 <div id="datepicker" class="flex-container flex-row box-edge">
                     <div id="datepicker-calender">
-                        <div>
-                            <button onclick=""> < </button>
-                            <span id="datepicker-calender-month">THIS MONTH</span>
-                            <button onclick=""> > </button>
-                        </div>
-                        <div id="datepicker-calender-day-container" class="flex-container flex-row">
-                            <div class="datepicker-calender-day">SUN</div>
-                            <div class="datepicker-calender-day">MON</div>
-                            <div class="datepicker-calender-day">TUE</div>
-                            <div class="datepicker-calender-day">WED</div>
-                            <div class="datepicker-calender-day">THU</div>
-                            <div class="datepicker-calender-day">FRI</div>
-                            <div class="datepicker-calender-day">SAT</div>
-                        </div>
+                        <table id="datepicker-calender-table">
+                            <thead>
+                                <tr>
+                                    <td colspan="1" ><button style="position: relative; " onclick="datepicker.setCalender(datepicker.calenderMonth-1)"> < </button></td>
+                                    <td colspan="5"><span id="datepicker-calender-month">THIS MONTH</span></td>
+                                    <td colspan="1"><button style="position: relative; " onclick="datepicker.setCalender(datepicker.calenderMonth+1)"> > </button></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="datepicker-calender-day">Sun</th>
+                                    <th class="datepicker-calender-day">Mon</th>
+                                    <th class="datepicker-calender-day">Tue</th>
+                                    <th class="datepicker-calender-day">Wed</th>
+                                    <th class="datepicker-calender-day">Thu</th>
+                                    <th class="datepicker-calender-day">Fri</th>
+                                    <th class="datepicker-calender-day">Sat</th>
+                                </tr>
+                            </tbody>
+                            <tbody id="datepicker-calender-day-container">
+
+                            </tbody>
+                        </table>
                     </div>
                     <div id="datepicker-timepicker">
                         <div>
