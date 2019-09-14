@@ -33,6 +33,24 @@ function limitNumber(comparison, min, max) {
 function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
-function abcd(){
-    console.log(1);
+function calcAngle(x = 0, y = 0){
+    return Math.atan2( x, y ) * (180/Math.PI);
 }
+// datepicker.js 로 옮겨야함
+
+const handle = document.getElementById("asd");
+var handleState = false;
+handle.addEventListener("mousedown",()=>{
+    handleState = true;
+});
+window.addEventListener("mousemove",(event)=>{
+    if (handleState) {
+        var circleRect = handle.parentElement.parentElement.getBoundingClientRect();
+        var mouseX = event.clientX - (circleRect.left + (circleRect.width/2));
+        var mouseY = -(event.clientY - (circleRect.top + (circleRect.height/2)));
+        handle.parentElement.style.transform = `translate(-50%,-50%) rotate(${calcAngle(mouseX, mouseY)}deg)`;
+    }
+});
+window.addEventListener("mouseup",()=>{
+    handleState = false;
+});
