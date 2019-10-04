@@ -1,0 +1,126 @@
+Asprite         RS 셀렉션필수,      OS 셀렉션선택
+{
+    File
+    {
+        New                 새 캔버스 생성
+        Open                캔버스 불러오기
+        Open Recent         
+        {
+            Reopen Closed File  마지막으로 닫은 파일 열기
+            -최근 연 파일들-
+            Clear Recent File   최근 연 파일 기록 삭제
+        }
+        
+        Save                저장
+        Save as             다른 이름으로 저장
+        Export              내보내기 - 다른 확장명 .jpg .png .gif 등
+        Close               캔버스 닫기
+        Close All           모든 캔버스 닫기
+
+        Import                  Sprite Sheet 스프라이트 시트 -> 프레임
+        Export                  Sprite Sheet 프레임 -> 스프라이트 시트
+        Repeat Last Export      Export Sprite Sheet를 마지막과 같은 설정으로 반복
+
+        Script      추가 기능 - 설치필요
+
+        Exit    나가기
+    }
+
+    Edit
+    {
+        Undo            실행 취소
+        Redo            Undo 취소  
+        Undo History    Undo 기록 다갖고있음
+
+        Cut             RS 잘라내기 
+        Copy            RS 복사 
+        Copy Merged     RS 레이어 상관없이 한번에 복사 
+        Paste           붙여넣기 
+        Paste Special
+        {
+            Paste as New Sprite             새 캔버스에 복사
+            Paste as New Layer              새 레이어에 복사
+            Paste as New Reference Layer    새 참조 레이어에 복사
+        }
+        Delete          OS 삭제 
+
+        Fill        RS 색 채우기
+        Stroke      RS 내곽 채우기
+
+        Rotate              OS 선택부분 회전
+        {
+            180         180도
+            90 CW       90도 시계방향
+            90 CCW      90도 반시계방향
+        }
+        Flip Horizontal     OS 좌우반전 
+        Flip Vertical       OS 상하반전 
+        Transform           그린 부분을 사각형으로 선택
+        Shift               RS 안에서 밀기
+        {
+            Left    왼쪽 1칸
+            Right   오른쪽 1칸
+            Up      위쪽 1칸
+            Down    아래쪽 1칸
+        }
+
+        New Brush                   OS 브러쉬로 설정
+        New Sprite From Selection   RS 새 캔버스에 복사
+
+        Replace Color       OS 하나의 색을 다른색으로 교체
+        Invert              OS 색상반전
+        Adjustments         OS 색상조절
+        {
+            Brightness/Contrast     밝기/대비
+            Hue/Saturation          HSV/HSL
+            Color Curve             컬러 커브
+        }         
+        FX                  OS 특수효과
+        {
+            Outline                     외곽선
+            Convolution Matrix          Convolution Matrix 필터
+            Despeckle (Median Filter)   노이즈 제거 (중간값 필터)
+        }
+        Insert Text         텍스트 삽입 
+        
+        Keyboard Shortcuts  단축키 설정
+        Preferences         환경 설정          
+    }
+
+    Sprite
+    {
+        Properties      스프라이트 속성
+        Color Mode      색 https://www.aseprite.org/docs/color-mode/
+        {
+            RGB Color       RGBA 사용
+            Grayscale       명도만 사용
+            Indexed         컬러 팔레트의 색상만 사용 
+
+            More Options    모르겠음 추가옵션 없는데
+        }
+
+        Duplicate       새 캔버스에 스프라이트 복제 
+
+        Sprite Size     그림 크기 조절
+        Canvas Size     그릴 공간 크기 조절
+        Rotate Canvas   전체 회전
+        {
+            180             180도
+            90CW            90도 시계방향 
+            90CCW           90도 반시계방향
+
+            Flip Canvas Horizontal  전체 좌우반전
+            Flip Canvas Vertical    전체 상하반전
+        }
+
+        Crop            RS 자르기
+        Trim            캔버스 남는부분 없애기
+    }
+    Layer
+    {
+        Properties      레이어 속성
+        Visible         선택 레이어 보이기
+        Lock Layer      선택 레이어 수정 막기
+        Open Group      선택 레이어의 그룹 열기
+    }
+}
