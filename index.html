@@ -11,6 +11,13 @@
             flex-direction: column;}
         .flex-row{
             flex-direction: row;}
+        .hide{
+            display: none;
+            opacity: 0;
+            overflow: hidden;
+            height: 0;
+            width: 0;
+            margin: 0;}
         .box-edge{
             box-shadow: rgba(255, 255, 255, 1) 0px 0px 4px;
             margin: 10px;}
@@ -29,17 +36,21 @@
             padding: 5% 0;}
         #datepicker-calender-day-container .date{
             font-weight: bold;}
-        #datepicker-calender-day-container .date:hover{
+        #datepicker-calender-day-container .date:hover:not(.late){
             height: 0;
-            
             overflow: hidden;
-            transition: all .5s;
-            background-color: crimson;}
+            color: rgb(30, 30, 30);
+            background-color: goldenrod;}
         #datepicker-calender-day-container .late{
             color: rgb(70,70,70);
         }
+        
         #datepicker-calender-table{
            width: 100%;
+        }
+        #datepicker-total span{
+            font-size:x-large;
+            color: goldenrod;
         }
         .post{
             width: 300px;
@@ -59,19 +70,27 @@
             color:darkgray;
             border-top: 1px solid slategrey;
             margin: 0%;}
-        .slider{
+        .circle-slider{
+            position: relative;
             width: 100%;
-            -webkit-appearance: none;
-            background: none;
-            cursor: ew-resize;}
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;}
-        #datepicker-timepicker-slider::-webkit-slider-thumb{
-            width: 1.8rem;
-            height: 1.8rem;
-            border-radius: 0.9rem;
-            background:crimson;}          
+            padding-bottom: 100%;}
+        .circle-slider .circle-slider-setting{
+            position: relative;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);}
+        .circle-slider .circle-slider-circle{
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%,-50%); 
+            border-radius: 100%; }
+        .circle-slider .circle-slider-bar{
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%,-50%) rotate(0deg); 
+            height: 100%;}
+        .circle-slider .circle-slider-handle{
+            position :relative;
+            padding-top: 100%; width: 1rem;}
         a{
             color: aliceblue;}
         img {
@@ -108,12 +127,7 @@
                         </div>
                     </div>
                     <div>
-                        <input accept="image/*" id="image-input" type="file" oninput="//imagePreview(this) 왜 함수가 이것만 안써지는데 
-                            var reader = new FileReader();
-                            reader.readAsDataURL(this.files[0]);
-                            reader.onload = function (event) {
-                                document.getElementById('preview').src = event.target.result;
-                            }"> 
+                        <input accept="image/*" id="image-input" type="file" oninput="imagePreview(this)"> 
                     </div>
                     <div class="post-content">
                         <span id="title-input" class="title" contenteditable="true">Title</span>
@@ -161,12 +175,11 @@
                                 <span>Time</span>
                                 <button>+</button>
                             </div>
-                            <div style="position: relative; width: 100%; padding-bottom: 100%;">
-                                <div style="position: absolute; border-radius: 100%; padding-bottom: 100%; width: 100%; background: wheat;">
-                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(0deg); height: 100%;">
-                                        <div id="asd" style="float: right; background: royalblue; width: 1rem; height: 1rem;">
-                                            
-                                        </div>
+                            <div id="datepicker-timepicker-slider" class="circle-slider">
+                                <input class="circle-slider-setting hide" type="range" value="72">
+                                <div class="circle-slider-circle" style="padding-bottom: 60%; width: 60%;">
+                                    <div class="circle-slider-bar">
+                                        <div class="circle-slider-handle" style="background: royalblue;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -178,5 +191,6 @@
         </div>
         <script type="text/javascript" src="funcs.js"></script>
         <script type="text/javascript" src="datepicker.js"></script>
+        <script type="text/javascript" src="circleslider.js"></script>
     </body>
 </html> 
