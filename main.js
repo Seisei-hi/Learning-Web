@@ -30,6 +30,7 @@ var app = http.createServer(function (request, response) {
   }
 });
 app.listen(3000);
+console.log("http://localhost:3000/");
 //node main.js
 
 

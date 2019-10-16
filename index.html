@@ -5,6 +5,32 @@
     <title>Learning-Web</title>
     <meta charset='utf-8'>
     <style>
+        a{
+            color: aliceblue;}
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;}
+        button{
+            cursor: pointer;
+            border: none;}
+        html {
+            font-size: 16px;
+            margin: 0;
+            height: 100%;
+            color: rgb(30, 30, 30);  
+            background: whitesmoke}
+        body {
+            margin: 0;
+            height: 100%;}
+        *{
+            -webkit-touch-callout: none;
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;}
+        *:focus {
+            /*outline: none;*/}
         .flex-container {
             display: flex;}
         .flex-column{
@@ -19,57 +45,121 @@
             width: 0;
             margin: 0;}
         .box-edge{
-            box-shadow: rgba(255, 255, 255, 1) 0px 0px 4px;
-            margin: 10px;}
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0.2rem;
+            margin: 0.6rem;}
         .box-center{
             margin: auto;}
         #datepicker{
-            width: 600px;
+            position: fixed;
+            width: 40rem;
             max-width: 100%;
             flex-wrap: wrap;
             justify-content:space-between;
-            text-align: center;}
+            text-align: center;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in;}
+        #datepicker *{
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in;}
+        #datepicker.am{
+            background-color: whitesmoke;}
+        #datepicker.pm{
+            background-color: rgb(30,30,30);}
         #datepicker > div{
             flex: 0 0 50% ;}
-        #datepicker-calender-table > .datepicker-calender-day{
+        #datepicker-calender-table .datepicker-calender-day{
             width: 14.2857142857%;
-            padding: 5% 0;}
+            padding: 3% 0;}
+        #datepicker-calender-month{
+            font-size: larger;
+            font-weight: bolder;}
+        .datepicker-calender-month-button{
+            background-color:transparent; 
+            font-size:large; 
+            font-weight: bold;}
+        .am .datepicker-calender-month-button{
+            color: rgb(30, 30, 30);}
+        .pm .datepicker-calender-month-button{
+            color: whitesmoke;}
+        .am #datepicker-calender-month{
+            color: rgb(30, 30, 30); }
+        .pm #datepicker-calender-month{
+            color: whitesmoke;}
+        .am .datepicker-calender-day{
+            color: rgb(30, 30, 30);}
+        .pm .datepicker-calender-day{
+            color: whitesmoke;}
+        .am #selected{
+            background-color: royalblue;
+            color: whitesmoke}
+        .pm #selected{
+            color: rgb(30, 30, 30);
+            background-color:#ffc400}
+        .am #selected.late{
+            background-color: rgb(76, 101, 173);
+            color: rgb(216, 216, 216)}
+        .pm #selected.late{
+            background-color:#cfa723;
+            color: rgb(68, 68, 68);}
         #datepicker-calender-day-container .date{
             font-weight: bold;}
-        #datepicker-calender-day-container .date:hover:not(.late){
-            height: 0;
-            overflow: hidden;
+        .am .date:hover:not(.late){
             color: rgb(30, 30, 30);
-            background-color: goldenrod;}
-        #datepicker-calender-day-container .late{
-            color: rgb(70,70,70);
-        }
-        
+            background-color:#ffc400}
+        .pm .date:hover:not(.late){
+            color: whitesmoke;
+            background-color: royalblue;}
+        .am .late{
+            color:gray;}
+        .pm .late{
+            color:darkgray;}
+        .am .date.late:hover{
+            background-color:#cfa723;
+            color: rgb(68, 68, 68);}
+        .pm .date.late:hover{
+            background-color: rgb(76, 101, 173);
+            color: rgb(216, 216, 216)}
         #datepicker-calender-table{
-           width: 100%;
-        }
-        #datepicker-total span{
-            font-size:x-large;
-            color: goldenrod;
-        }
+           width: 100%; }
+        #datepicker-total *{
+            font-size:x-large;}
+        .am #datepicker-total *{
+            color: royalblue;}
+        .pm #datepicker-total *{
+            color: #ffc400;}
         .post{
-            width: 300px;
-            margin: 10px;}
-        .post-content{
+            background: whitesmoke;
+            max-width: 40em;
+            width: 20em;
+            transition-duration: 1s;
+            transition-timing-function: cubic-bezier(0, 0, 0.2, 1);}
+        .post-content > *{
             box-sizing: border-box;
-            padding: 10px;
-            width: 100%;}
-        .post-content >.title {
+            padding: 0.6em;
+            width:100%;}
+        .post.imgloaded{
+            width:40em;}
+        .post.imgloaded> .post-content >*{
+            width:50%;}
+        .post-img-container{
+            max-height: 20em;
+            overflow:auto;}
+        .post-content .post-title {
             font-weight: bold;
-            font-size: 2rem;}
-        .post-content > .date{
-            font-size: 120rem;
-            color: darkgray}
-        .post-content > .detail {
-            font-size: 1.2rem;
-            color:darkgray;
-            border-top: 1px solid slategrey;
-            margin: 0%;}
+            font-size: 2em;
+            border-bottom: 1px solid darkgray;}
+        .post-title[contenteditable=true]:empty:before{
+            content: attr(placeholder);
+            color:dimgray;
+            cursor:text;}
+        .post-content .post-detail {
+            font-size: 1.2em;
+            min-height: 30%;
+            border-bottom: 1px solid darkgray;}
+        .post-detail[contenteditable=true]:empty:before{
+            content: attr(placeholder);
+            color:dimgray;
+            cursor:text;}
         .circle-slider{
             position: relative;
             width: 100%;
@@ -87,63 +177,78 @@
             position: absolute; 
             top: 50%; left: 50%; 
             transform: translate(-50%,-50%) rotate(0deg); 
-            height: 100%;}
+            height: 100%;
+            transition: none;}
         .circle-slider .circle-slider-handle{
             position :relative;
-            padding-top: 100%; width: 1rem;}
-        a{
-            color: aliceblue;}
-        img {
-            object-fit: cover;
-            width: 100%;
-            height: 100;}
-        button{  
-        background:slategrey;
-        color :whitesmoke;
-        cursor: pointer;
-        border: none;}
-        html {
-            font-size: 100%;
-            margin: 0;
-            height: 100%;
-            color: whitesmoke;  
-            background: rgb(30, 30, 30);}
-        body {
-            margin: 0;
-            height: 100%;}
-        *:focus {
-            /*outline: none;*/}
+            padding-top: 100%; width: 1rem; }
+        .circle-slider .circle-slider-ampm{
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%,-50%) rotate(0deg); }
+        .circle-slider-ampm .circle-slider-ampm-radio{  
+            display: inline-block;
+            font-size:large;
+            padding: 0.2rem 0.5rem;}
+        .clock-bar{
+            position: absolute; 
+            top: 50%; left: 50%; 
+            width:65%; height: 0.2rem;}
+        .clock-bar > *{
+            position: relative;
+            width: 5%; height: 100%;}
+        .am .clock-bar > *{
+            background-color: royalblue;}
+        .pm .clock-bar > *{
+            background-color: #ffc400;}
+        .am .sharptime{
+            background-color: #ffc400;}
+        .pm .sharptime{
+            background-color: royalblue;}
+        .am #datepicker-timepicker-slider-handle{
+            background: royalblue;}
+        .pm #datepicker-timepicker-slider-handle{
+            background: #ffc400;}
+        
     </style>
 </head>
     <body>
         <div>
+            <button style="width: 100%; height: 3rem;" 
+                onclick=" let elements =this.parentElement.children;
+                for (let i = 1; i < elements.length; i++) {
+                    if(!elements[i].classList.contains(`hide`)){
+                        elements[i].classList.add(`hide`);
+                        let nextIndex = elements.length == i+1 ? 1 : i+1;
+                        elements[nextIndex].classList.remove(`hide`);
+                        break;
+                    }
+                }">Change</button>
             <div>
-                <div class="post flex-container flex-column box-edge">
-                    <div href="" style="position: relative">
-                        <img id="preview" src="Fx.gif" >
-                        <div style="position: absolute; top: 10px; right: 10px; text-align: center;">
-                            <div class="date" contenteditable="true" datetime="">27</div>   
-                            <div class="date" contenteditable="true" datetime="">MAR</div>
+                <div id="post-form" class="post flex-container flex-column box-edge">
+                    <div class="post-content flex-container flex-row" style="flex-wrap: wrap;">
+                        <div>
+                            <div class="post-img-conainer">
+                                <img id="preview-img" class="post-img" draggable="false" onload="this.parentElement.parentElement.parentElement.parentElement.classList.add(`imgloaded`)">
+                            </div>
+                            <input accept="image/*" id="image-input" type="file" oninput="imagePreview(this);"> 
+                            <div id="title-input" class="post-title" placeholder="New Schedule" contenteditable="true"></div>
+                        </div>
+                        <div>
+                            <div id="detail-input" class="post-detail" placeholder="Detail" contenteditable="true"></div>
                         </div>
                     </div>
-                    <div>
-                        <input accept="image/*" id="image-input" type="file" oninput="imagePreview(this)"> 
-                    </div>
-                    <div class="post-content">
-                        <span id="title-input" class="title" contenteditable="true">Title</span>
-                        <div id="detail-input" class="detail" contenteditable="true">Detail</div>
-                    </div>
-                    <button onclick="sendFormData()">MAKE</button>
+                    <button style="height: 2rem; font-weight: bolder;" onclick="sendFormData()">MAKE</button>
                 </div>
                 <!--DATE PICKER-->
-                <div id="datepicker" class="flex-container flex-row box-edge">
+                <div id="datepicker" class="flex-container flex-row box-edge am">
                     <div id="datepicker-calender">
                         <table id="datepicker-calender-table">
                             <thead>
                                 <tr>
-                                    <td colspan="1" ><button style="position: relative; " onclick="datepicker.setCalender(datepicker.calenderMonth-1)"> < </button></td>
+                                    <td colspan="1"><button class="datepicker-calender-month-button" onclick="datepicker.setCalender(datepicker.calenderMonth-1)"> < </button></td>
                                     <td colspan="5"><span id="datepicker-calender-month">Month</span></td>
-                                    <td colspan="1"><button style="position: relative; " onclick="datepicker.setCalender(datepicker.calenderMonth+1)"> > </button></td>
+                                    <td colspan="1"><button class="datepicker-calender-month-button" onclick="datepicker.setCalender(datepicker.calenderMonth+1)"> > </button></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,7 +263,6 @@
                                 </tr>
                             </tbody>
                             <tbody id="datepicker-calender-day-container">
-
                             </tbody>
                         </table>
                     </div>
@@ -170,27 +274,75 @@
                             </p>
                         </div>
                         <div id="datepicker-timepicker">
-                            <div>
-                                <button>-</button>
-                                <span>Time</span>
-                                <button>+</button>
+                            <div style="position: relative">
+                                <div style="position: absolute; width: 100%; margin-top: 50%;">
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%);">
+                                        <div style="float: left; width: 10%;"></div>
+                                        <div style="float: right; width: 10%;"></div>
+                                    </div>
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%) rotate(30deg);">
+                                        <div style="float: left;"></div>
+                                        <div style="float: right;"></div>
+                                    </div>
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%) rotate(60deg);">
+                                        <div style="float: left;"></div>
+                                        <div style="float: right;"></div>
+                                    </div>
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%) rotate(90deg);">
+                                        <div class="sharptime" style="float: left; width: 10%;"></div>
+                                        <div style="float: right; width: 10%;"></div>
+                                    </div>
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%) rotate(120deg);">
+                                        <div style="float: left;"></div>
+                                        <div style="float: right;"></div>
+                                    </div>
+                                    <div class="clock-bar" style="transform: translate(-50%,-50%) rotate(150deg);">
+                                        <div style="float: left;"></div>
+                                        <div style="float: right;"></div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="datepicker-timepicker-slider" class="circle-slider">
                                 <input class="circle-slider-setting hide" type="range" value="72">
                                 <div class="circle-slider-circle" style="padding-bottom: 60%; width: 60%;">
-                                    <div class="circle-slider-bar">
-                                        <div class="circle-slider-handle" style="background: royalblue;"></div>
+                                    <div class="circle-slider-bar" >
+                                        <div id="datepicker-timepicker-slider-handle" class="circle-slider-handle"></div>
                                     </div>
                                 </div>
+                                <div class="circle-slider-ampm">
+                                    <button class="circle-slider-ampm-radio" style="background: royalblue" onclick="datepicker.setAmPm(false)" >AM</button>
+                                    <button class="circle-slider-ampm-radio" style="background: #ffc400; color: rgb(30, 30, 30)" onclick="datepicker.setAmPm(true)">PM</button>
+                                </div>  
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--DATE PICKER END-->
             </div>
+            <div id="postgrid" style="font-size: 16px;" class="hide">
+                <input type="number" value="16" onchange="this.parentElement.style.fontSize=`${this.value}px`;">
+                <div class="post-container" style="position: relative; top: 0em; left: 0em;">
+                    <div class="post flex-container flex-column box-edge">
+                        <div class="post-content flex-container flex-row" style="flex-wrap: wrap;">
+                            <div>
+                                <div class="post-img-container">
+                                    <img class="post-img" draggable="false" src="holog.png" onload="this.parentElement.parentElement.parentElement.parentElement.classList.add(`imgloaded`)">
+                                </div>
+                                <div class="post-title" placeholder="New Schedule" contenteditable="true"></div>
+                            </div>
+                            <div>
+                                <div class="post-detail" placeholder="Detail" contenteditable="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
         </div>
         <script type="text/javascript" src="funcs.js"></script>
         <script type="text/javascript" src="datepicker.js"></script>
         <script type="text/javascript" src="circleslider.js"></script>
+        <script type="text/javascript" src="schedule.js"></script>
+       
     </body>
 </html> 

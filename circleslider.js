@@ -1,16 +1,14 @@
 
-var sliderElements = document.getElementsByClassName("circle-slider");
-var sliders = {};
-var onchangeFuncs = {};
-const sliderSetting = 0, sliderHandle =1, sliderState = 2;
 
-onchangeFuncs["datepicker-timepicker-slider"] = (circleValue) => {
-    let setting = sliders["datepicker-timepicker-slider"].setting;
+var circleSliders = {};
+var onAngleChangeFuncs = {};
+
+onAngleChangeFuncs["datepicker-timepicker-slider"] = (circleValue) => {
+    let setting = circleSliders["datepicker-timepicker-slider"].setting;
     let timeInterval = setting.value/12;
     let hours =(circleValue - circleValue % timeInterval) / timeInterval;
     let minutes = circleValue % timeInterval * (60 / timeInterval);
     
-    console.log(`${hours}:${minutes}`);
     datepicker.setTotalTime(hours,minutes);
 }
 
@@ -20,20 +18,20 @@ class CircleSlider{
     state;
     onchangeFunc;
     constructor(sliderElement) {
-        this.setting = sliderElement.children[0] ;
+        this.setting = sliderElement.children[0];
         this.handle = sliderElement.children[1].children[0].children[0];
         this.state = false;
-        this.onchangeFunc = onchangeFuncs[sliderElement.id];
+        this.onchangeFunc = onAngleChangeFuncs[sliderElement.id];
     }
 }
 
 function setCircleSlider(sliderElement) {
-    sliders[sliderElement.id] = new CircleSlider(sliderElement);
+    circleSliders[sliderElement.id] = new CircleSlider(sliderElement);
     
-    var setting = sliders[sliderElement.id].setting;
-    var handle = sliders[sliderElement.id].handle;
-    var state = sliders[sliderElement.id].state;
-    var onchangeFunc = sliders[sliderElement.id].onchangeFunc;
+    var setting = circleSliders[sliderElement.id].setting;
+    var handle = circleSliders[sliderElement.id].handle;
+    var state = circleSliders[sliderElement.id].state;
+    var onchangeFunc = circleSliders[sliderElement.id].onchangeFunc;
     var lastHandleAngle = 0;
     handle.addEventListener("mousedown",()=>{
         state = true;
@@ -61,8 +59,7 @@ function setCircleSlider(sliderElement) {
         state = false;
     });
 }
-
-
+var sliderElements = document.getElementsByClassName("circle-slider");
 for (let i = 0; i < sliderElements.length; i++) {
     setCircleSlider(sliderElements[i]);
 }
