@@ -14,21 +14,22 @@ function setPostDragAndDrop(postContainerElement) {
     });
     window.addEventListener("mousemove",(event)=>{
         if (state) {
-            let gridFontSize =  parseInt(postGrid.style.fontSize, 10);
-            let moveEmOffsetX = (event.clientX - oldPosition.mouseX)/gridFontSize;
-            let moveEmOffsetY = (event.clientY - oldPosition.mouseY)/gridFontSize;
-            postContainerElement.style.left =`${oldPosition.elementX + moveEmOffsetX}em`;
-            postContainerElement.style.top =`${oldPosition.elementY + moveEmOffsetY}em`;
+            let gridFontSize = postGrid.style.zoom;
+            let moveOffsetX = (event.clientX - oldPosition.mouseX)/gridFontSize;
+            let moveOffsetY = (event.clientY - oldPosition.mouseY)/gridFontSize;
+            postContainerElement.style.left =`${oldPosition.elementX + moveOffsetX}px`;
+            postContainerElement.style.top =`${oldPosition.elementY + moveOffsetY}px`;
         }
     });
     window.addEventListener("mouseup",()=>{
         state = false;
         let postLeft = Math.round(parseFloat(postContainerElement.style.left, 10));
         let postTop = Math.round(parseFloat(postContainerElement.style.top, 10));
-        postContainerElement.style.left =`${postLeft}em`;
-        postContainerElement.style.top =`${postTop}em`;
+        postContainerElement.style.left =`${postLeft}px`;
+        postContainerElement.style.top =`${postTop}px`;
     });
 }
+
 for (let i = 0; i < postContainers.length; i++) {
     setPostDragAndDrop(postContainers[i]);
     

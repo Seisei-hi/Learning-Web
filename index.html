@@ -45,8 +45,8 @@
             width: 0;
             margin: 0;}
         .box-edge{
-            box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0.2rem;
-            margin: 0.6rem;}
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 4px;
+            margin: 10px;}
         .box-center{
             margin: auto;}
         #datepicker{
@@ -129,31 +129,31 @@
             color: #ffc400;}
         .post{
             background: whitesmoke;
-            max-width: 40em;
-            width: 20em;
+            max-width: 600px;
+            width: 300px;
             transition-duration: 1s;
             transition-timing-function: cubic-bezier(0, 0, 0.2, 1);}
         .post-content > *{
             box-sizing: border-box;
-            padding: 0.6em;
+            padding: 10px;
             width:100%;}
         .post.imgloaded{
-            width:40em;}
+            width:600px;}
         .post.imgloaded> .post-content >*{
             width:50%;}
         .post-img-container{
-            max-height: 20em;
+            max-height: 300px;
             overflow:auto;}
         .post-content .post-title {
             font-weight: bold;
-            font-size: 2em;
+            font-size: 2rem;
             border-bottom: 1px solid darkgray;}
         .post-title[contenteditable=true]:empty:before{
             content: attr(placeholder);
             color:dimgray;
             cursor:text;}
         .post-content .post-detail {
-            font-size: 1.2em;
+            font-size: 1.2rem;
             min-height: 30%;
             border-bottom: 1px solid darkgray;}
         .post-detail[contenteditable=true]:empty:before{
@@ -319,9 +319,9 @@
                 </div>
                 <!--DATE PICKER END-->
             </div>
-            <div id="postgrid" style="font-size: 16px;" class="hide">
-                <input type="number" value="16" onchange="this.parentElement.style.fontSize=`${this.value}px`;">
-                <div class="post-container" style="position: relative; top: 0em; left: 0em;">
+            <div id="postgrid" style="zoom: 1;" class="hide">
+                <input type="number" value="1" onchange="var multiplyValue= this.value > 0 ? this.value: 1/-(this.value-2); this.parentElement.style.zoom= `${multiplyValue}`;">
+                <div class="post-container" style="position: absolute; top: 0rem; left: 0rem;">
                     <div class="post flex-container flex-column box-edge">
                         <div class="post-content flex-container flex-row" style="flex-wrap: wrap;">
                             <div>
