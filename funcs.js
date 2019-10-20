@@ -32,4 +32,4 @@ function sendFormData() {
     xhr.open("POST", "/post/upload", true);
     fileReader.readAsBinaryString(document.getElementById("imageInput").files[0]);
 }
-// datepicker.js 로 옮겨야함
+
