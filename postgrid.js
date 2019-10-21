@@ -10,14 +10,14 @@ function setPostDragAndDrop(postContainerElement) {
     });
     window.addEventListener("mousemove",(event)=>{
         if (event.buttons==1 && state) {
-            postContainerElement.style.left =`${parseFloat(postContainerElement.style.left, 10)+event.movementX*10/zoomValue}px`;
-            postContainerElement.style.top =`${parseFloat(postContainerElement.style.top, 10)+event.movementY*10/zoomValue}px`;
+            postContainerElement.style.left =`${parseFloat(postContainerElement.style.left)+event.movementX*10/zoomValue}px`;
+            postContainerElement.style.top =`${parseFloat(postContainerElement.style.top)+event.movementY*10/zoomValue}px`;
         }
     });
     window.addEventListener("mouseup",()=>{
         state = false; 
-        let postLeft = Math.round(parseFloat(postContainerElement.style.left, 10));
-        let postTop = Math.round(parseFloat(postContainerElement.style.top, 10));
+        let postLeft = Math.round(parseFloat(postContainerElement.style.left));
+        let postTop = Math.round(parseFloat(postContainerElement.style.top));
         postContainerElement.style.left =`${postLeft}px`;
         postContainerElement.style.top =`${postTop}px`;
         
@@ -25,8 +25,8 @@ function setPostDragAndDrop(postContainerElement) {
 }
 postGrid.parentElement.addEventListener("mousemove",(event)=>{
     if(event.buttons == 4){
-        postGrid.style.left =`${parseFloat(postGrid.style.left, 10)+event.movementX}px`;
-        postGrid.style.top =`${parseFloat(postGrid.style.top, 10)+event.movementY}px`;
+        postGrid.style.left =`${parseFloat(postGrid.style.left)+event.movementX}px`;
+        postGrid.style.top =`${parseFloat(postGrid.style.top)+event.movementY}px`;
     }
 });
 
@@ -34,10 +34,14 @@ let hideDeatil = false;
 postGrid.parentElement.addEventListener("wheel",(event)=>{
     let deltaYSign = event.deltaY > 0;
     zoomValue += deltaYSign ? -1:1;
-    zoomValue = zoomValue > 0 ? zoomValue :1;
+    zoomValue = zoomValue > 0 ? zoomValue : 1;
     gridScale = zoomValue/10; //zoomValue > 0 ? zoomValue : 1/-(zoomValue-2); 
-    postGrid.style.transform = `scale(${gridScale})`;
 
+    postGrid.style.transform = `scale(${gridScale})`;
+    if(!deltaYSign && zoomValue ){
+        postGrid.style.left = `${parseFloat(postGrid.style.left) + (parseFloat(postGrid.style.left) - event.clientX)/2}px`;
+        postGrid.style.top = `${parseFloat(postGrid.style.top) + (parseFloat(postGrid.style.top) - event.clientY)/2}px`;
+    }   
     if (zoomValue == 4 && !hideDeatil) {
         let postDetails = document.getElementsByClassName(`post-detail`);
         for (let i = 0; i < postDetails.length; i++) {
