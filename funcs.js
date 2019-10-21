@@ -18,6 +18,15 @@ function rgbToHex(r, g, b) {
 function calcAngle(x = 0, y = 0){
     return Math.atan2( x, y ) * (180/Math.PI);
 }
+function normalize(x,y) {
+    if(x == 0 && y == 0) {
+        return {x:0, y:0};
+    }    
+    let angle = Math.atan2(y,x);
+    x = Math.cos(angle);
+    y = Math.sin(angle);
+    return {x:x, y:y};
+} 
 function sendFormData() {
     var xhr = new XMLHttpRequest();
     var fileReader = new FileReader();
