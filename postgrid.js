@@ -29,7 +29,7 @@ postGrid.parentElement.addEventListener("mousemove",(event)=>{
     }
 });
 
-let hideDeatil = false;
+var hideDeatil = false;
 postGrid.parentElement.addEventListener("wheel",(event)=>{
     let deltaYSign = event.deltaY > 0;
     zoomValue += deltaYSign ? -1:1;
@@ -46,15 +46,9 @@ postGrid.parentElement.addEventListener("wheel",(event)=>{
     let offsetY = parseFloat(postGrid.style.top) - event.clientY;
 
     if (deltaYSign) {
-        dirX *= -1;
-        dirY *= -1;
-        offsetX *= -1;
-        offsetY *= -1;
+        postGrid.style.left = `${parseFloat(postGrid.style.left) + dirX }px`;
+        postGrid.style.top = `${parseFloat(postGrid.style.top) + dirY }px`;
     }
-
-    postGrid.style.left = `${parseFloat(postGrid.style.left) + dirX }px`;
-    postGrid.style.top = `${parseFloat(postGrid.style.top) + dirY}px`;
-
     
     if (zoomValue == 4 && !hideDeatil) {
         let postDetails = document.getElementsByClassName(`post-detail`);
