@@ -33,28 +33,22 @@ var hideDeatil = false;
 postGrid.parentElement.addEventListener("wheel",(event)=>{
     let deltaYSign = event.deltaY > 0;
     zoomValue += deltaYSign ? -1:1;
-    zoomValue = limitNumber(zoomValue,1,10);
+    if (zoomValue > 10) { zoomValue=  10; }
+    else if (zoomValue < 1) { zoomValue = 1; }
 
     if (1 < zoomValue && zoomValue < 10) {
-        gridScale = zoomValue/10;
+        postGrid.style.transform = `scale(${zoomValue/10})`;
 
-        postGrid.style.transform = `scale(${gridScale})`;
+        let zoomInOut = deltaYSign ? -1:1;
         
         let centerRect = postGrid. parentElement.getBoundingClientRect();
-        let dirX = centerRect.width/2 - event.clientX;
-        let dirY = centerRect.height/2 - event.clientY;
 
-        let offsetX = (parseFloat(postGrid.style.left) - event.clientX)/(zoomValue-1);
-        let offsetY = (parseFloat(postGrid.style.top) - event.clientY)/(zoomValue-1);
+        let offsetX = (parseFloat(postGrid.style.left) - centerRect.width/2 )/(zoomValue-zoomInOut);
+        let offsetY = (parseFloat(postGrid.style.top)  - centerRect.height/2 )/(zoomValue-zoomInOut);
 
-        let a = dirX + offsetX;
-        let b = dirY + offsetY;
-
-        if (!deltaYSign) {
-            postGrid.style.left = `${parseFloat(postGrid.style.left) +offsetX + dirX/3 }px`;
-            postGrid.style.top = `${parseFloat(postGrid.style.top) +offsetY + dirY/3 }px`;
-        }
-        
+        postGrid.style.left = `${parseFloat(postGrid.style.left) +offsetX*zoomInOut}px`;
+        postGrid.style.top = `${parseFloat(postGrid.style.top) +offsetY*zoomInOut}px`;
+                
         if (zoomValue == 4 && !hideDeatil) {
             let postDetails = document.getElementsByClassName(`post-detail`);
             for (let i = 0; i < postDetails.length; i++) {
